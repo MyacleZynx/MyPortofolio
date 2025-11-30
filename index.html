@@ -39,6 +39,9 @@
     <div class="fixed bottom-4 right-4 w-64 p-4 bg-white dark:bg-gray-800 text-black dark:text-white rounded-2xl shadow-xl border border-gray-300 dark:border-gray-700 z-50">
 
       <div class="flex items-center space-x-3 mb-3">
+        <img src="https://raw.githubusercontent.com/Myglce/This-is-the-storage/refs/heads/main/Sancho/2025130809.jpg"
+             class="w-10 h-10 rounded-full border border-gray-400 dark:border-gray-600">
+
         <button id="play-btn" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
           <svg id="play-icon" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
             <path d="M8 5v14l11-7z"/>
@@ -61,7 +64,8 @@
 
     <audio id="bg-music" src="https://raw.githubusercontent.com/Myglce/This-is-the-storage/refs/heads/main/Sancho/2025121720.mp3"></audio>
 
-    
+
+
     <!-- Header -->
     <header class="bg-white dark:bg-black shadow-md sticky top-0 z-40 border-b border-gray-300 dark:border-gray-700">
       <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -105,7 +109,7 @@
       </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About -->
     <section id="about" class="py-16">
       <div class="container mx-auto px-4">
         <h3 class="text-3xl font-bold text-center mb-8">About Me</h3>
@@ -116,7 +120,7 @@
       </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills -->
     <section id="skills" class="py-16 bg-gray-100 dark:bg-gray-900">
       <div class="container mx-auto px-4">
         <h3 class="text-3xl font-bold text-center mb-8">Skills</h3>
@@ -154,76 +158,29 @@
       </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-16">
-      <div class="container mx-auto px-4">
-        <h3 class="text-3xl font-bold text-center mb-8">Projects</h3>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-md">
-            <img src="/project1.jpg" class="w-full h-48 object-cover rounded mb-4">
-            <h4 class="text-xl font-semibold mb-2">E-Commerce Website</h4>
-            <p class="mb-4">A full-stack e-commerce platform built with React and Node.js.</p>
-          </div>
-
-          <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-md">
-            <img src="/project2.jpg" class="w-full h-48 object-cover rounded mb-4">
-            <h4 class="text-xl font-semibold mb-2">Portfolio Site</h4>
-            <p class="mb-4">A responsive portfolio using Tailwind CSS and vanilla JavaScript.</p>
-          </div>
-
-          <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-md">
-            <img src="/project3.jpg" class="w-full h-48 object-cover rounded mb-4">
-            <h4 class="text-xl font-semibold mb-2">Task Manager App</h4>
-            <p class="mb-4">A To-Do app built with Vue.js & Firebase.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-100 dark:bg-gray-900">
-      <div class="container mx-auto px-4 text-center">
-        <h3 class="text-3xl font-bold mb-8">Contact Me</h3>
-        <p class="mb-6">Feel free to reach out via social media or messaging apps.</p>
-
-        <div class="flex justify-center space-x-4">
-          <a href="https://wa.me/1234567890" class="bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-300 transition">WhatsApp</a>
-          <a href="https://linkedin.com/in/myacle" class="bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-300 transition">LinkedIn</a>
-          <a href="https://github.com/myacle" class="bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-300 transition">GitHub</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-8 border-t border-gray-300 dark:border-gray-700 text-center">
-      <p>&copy; 2024 Myacle. All rights reserved.</p>
-    </footer>
-
-    
-    <!-- SCRIPTS -->
+    <!-- Music Player Script -->
     <script>
-      // DARK MODE TOGGLE
+      const html = document.documentElement;
       const themeToggle = document.getElementById("theme-toggle");
+
+      if (localStorage.getItem("theme") === "dark") {
+        html.classList.add("dark");
+      }
+
       themeToggle.addEventListener("click", () => {
-        document.documentElement.classList.toggle("dark");
+        html.classList.toggle("dark");
+        localStorage.setItem("theme",
+          html.classList.contains("dark") ? "dark" : "light"
+        );
       });
 
-      // MOBILE MENU
-      const mobileBtn = document.getElementById("mobile-menu-btn");
-      const mobileMenu = document.getElementById("mobile-menu");
-      mobileBtn.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-      });
-
-      // MUSIC PLAYER SYSTEM
+      // MUSIC PLAYER
       const music = document.getElementById("bg-music");
       const playBtn = document.getElementById("play-btn");
       const playIcon = document.getElementById("play-icon");
       const pauseIcon = document.getElementById("pause-icon");
-      const progressBar = document.getElementById("progress-bar");
       const timeDisplay = document.getElementById("time-display");
+      const progressBar = document.getElementById("progress-bar");
 
       playBtn.addEventListener("click", () => {
         if (music.paused) {
@@ -237,25 +194,30 @@
         }
       });
 
-      music.addEventListener("timeupdate", () => {
-        const percent = (music.currentTime / music.duration) * 100;
-        progressBar.value = percent;
+      music.addEventListener("loadedmetadata", () => {
+        updateTime();
+      });
 
-        const current = formatTime(music.currentTime);
-        const total = formatTime(music.duration);
-        timeDisplay.textContent = `${current} / ${total}`;
+      music.addEventListener("timeupdate", () => {
+        updateTime();
+        progressBar.value = (music.currentTime / music.duration) * 100;
       });
 
       progressBar.addEventListener("input", () => {
-        const seek = (progressBar.value / 100) * music.duration;
-        music.currentTime = seek;
+        music.currentTime = (progressBar.value / 100) * music.duration;
       });
+
+      function updateTime() {
+        const cur = formatTime(music.currentTime);
+        const dur = formatTime(music.duration);
+        timeDisplay.textContent = `${cur} / ${dur}`;
+      }
 
       function formatTime(sec) {
         if (isNaN(sec)) return "0:00";
         const m = Math.floor(sec / 60);
-        const s = Math.floor(sec % 60).toString().padStart(2, "0");
-        return `${m}:${s}`;
+        const s = Math.floor(sec % 60);
+        return `${m}:${s.toString().padStart(2, "0")}`;
       }
     </script>
 
