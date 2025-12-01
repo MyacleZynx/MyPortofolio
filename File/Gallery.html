@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Myacle Gallery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200 dark:bg-gray-900 text-black dark:text-white">
+  <h1 class="text-center text-4xl font-bold py-8">My Digital Gallery</h1>
+  <div class="grid md:grid-cols-3 gap-6 px-8">
+    <img src="/project1.jpg" class="rounded shadow-md">
+    <img src="/project2.jpg" class="rounded shadow-md">
+    <img src="/project3.jpg" class="rounded shadow-md">
+  </div>
+
+  <canvas id="gallery-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+
+  <script>
+    const canvas = document.getElementById('gallery-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let particles = [];
+    for(let i=0;i<80;i++){
+      particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*3+1, dx:(Math.random()-0.5)*1, dy:(Math.random()-0.5)*1});
+    }
+    function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(135,206,235,0.7)';
+        ctx.fill();
+        p.x+=p.dx; p.y+=p.dy;
+        if(p.x<0||p.x>canvas.width) p.dx*=-1;
+        if(p.y<0||p.y>canvas.height) p.dy*=-1;
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+    window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight});
+  </script>
+</body>
+</html>
