@@ -192,6 +192,79 @@
       </div>
     </section>
 
+<!-- GALLERY SECTION -->
+<section id="gallery" class="py-16 bg-gray-200 dark:bg-gray-900 relative overflow-hidden">
+  <div class="container mx-auto px-4 text-center relative z-10">
+    <h3 class="text-3xl font-bold mb-8">My Digital Gallery</h3>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+        <img src="https://raw.githubusercontent.com/Myglce/This-is-the-storage/refs/heads/main/Sancho/2025130809.jpg" 
+             class="rounded mb-2 w-full h-48 object-cover">
+        <p class="text-sm">Random Artwork 1</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+        <img src="https://i.scdn.co/image/ab67616d0000b27378dcf7c664ac1d53fd5a78db" 
+             class="rounded mb-2 w-full h-48 object-cover">
+        <p class="text-sm">Random Artwork 2</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+        <img src="/project1.jpg" class="rounded mb-2 w-full h-48 object-cover">
+        <p class="text-sm">Random Artwork 3</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CANVAS FOR EFFECT -->
+  <canvas id="gallery-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+</section>
+
+<script>
+  // TOMBOL GET IN TOUCH SCROLL KE GALLERY
+  document.querySelector('a[href="#contact"]').addEventListener('click', function(e){
+    e.preventDefault();
+    document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // SIMPLE CANVAS ANIMATION
+  const canvas = document.getElementById('gallery-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height, particles = [];
+
+  function initCanvas() {
+    width = canvas.width = canvas.offsetWidth;
+    height = canvas.height = canvas.offsetHeight;
+    particles = [];
+    for(let i=0; i<80; i++){
+      particles.push({
+        x: Math.random()*width,
+        y: Math.random()*height,
+        r: Math.random()*3 + 1,
+        dx: (Math.random()-0.5)*1,
+        dy: (Math.random()-0.5)*1
+      });
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0,0,width,height);
+    particles.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(135,206,235,0.7)'; // skyblue glow
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if(p.x<0||p.x>width) p.dx*=-1;
+      if(p.y<0||p.y>height) p.dy*=-1;
+    });
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', initCanvas);
+  initCanvas();
+  animate();
+</script>
+    
     <!-- Contact Section -->
     <section id="contact" class="py-16 bg-gray-100 dark:bg-gray-900">
       <div class="container mx-auto px-4 text-center">
