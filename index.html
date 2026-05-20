@@ -68,12 +68,24 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-b from-gray-200 to-gray-50 dark:from-gray-900 dark:to-gray-950 py-24 transition-colors">
-    <div class="container mx-auto px-4 text-center">
-      <div class="relative inline-block mb-6">
+    <!-- Hero Section (Updated dengan Cover Photo) -->
+  <section class="bg-gradient-to-b from-gray-200 to-gray-50 dark:from-gray-900 dark:to-gray-950 pb-24 transition-colors">
+    
+    <!-- Cover Photo Container -->
+    <div class="w-full h-48 md:h-72 lg:h-80 relative shadow-sm border-b border-gray-200 dark:border-gray-800">
+      <img src="https://files.catbox.moe/q5q03d.jpg" class="w-full h-full object-cover" alt="Cover Photo">
+      <!-- Efek gradient tipis di bagian bawah cover agar menyatu dengan background -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+    </div>
+
+    <div class="container mx-auto px-4 text-center relative">
+      
+      <!-- Profile Picture Container -->
+      <!-- -mt-20 di HP dan -mt-28 di Desktop akan menarik foto ke atas menimpa cover photo -->
+      <div class="relative inline-block -mt-20 md:-mt-28 mb-6">
         <img src="https://raw.githubusercontent.com/Myglce/This-is-the-storage/refs/heads/main/Sancho/2025130809.jpg"
-             class="w-40 h-40 object-cover rounded-full mx-auto border-4 border-white dark:border-gray-800 shadow-xl relative z-10" alt="Profile Picture">
+             class="w-36 h-36 md:w-44 md:h-44 object-cover rounded-full mx-auto border-4 border-white dark:border-gray-900 shadow-xl relative z-10" alt="Profile Picture">
+        <!-- Efek Glow -->
         <div class="absolute inset-0 rounded-full bg-skillBar blur-xl opacity-30 z-0"></div>
       </div>
 
@@ -87,6 +99,7 @@
       </a>
     </div>
   </section>
+
 
   <!-- About Section -->
   <section id="about" class="py-20">
